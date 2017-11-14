@@ -1,14 +1,35 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>
-      Ionic Blank
+      <img src="assets/images/logo.png"/>
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addChecklist()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <ion-list no-lines>
+    <!--ngFor angular 2's for loop, runs on an html, getting information from ts file.-->
+    <ion-item-sliding *ngFor="let checklist of checklists">
+      <button ion-item (click)="viewChecklist(checklist)">
+        <!--getting info from typescript file that associates w that page. Look for info accessible in home.ts file, statements can go in there etc.-->
+        {{checklist.title}}
+        <span>{{checklist.items.length}}</span>
+      </button>
+      <ion-item-options>
+        <button ion-button icon-only color="light" (click)="renameChecklist(checklist)">
+          <ion-icon name="clipboard"> Edit</ion-icon>
+        </button>
+        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)">
+          <ion-icon name="trash"> Delete</ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
